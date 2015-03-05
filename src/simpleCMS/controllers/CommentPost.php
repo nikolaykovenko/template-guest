@@ -7,6 +7,7 @@
 
 namespace simpleCMS\controllers;
 
+use simpleCMS\exceptions\ValidationException;
 use simpleCMS\model\Comments;
 
 /**
@@ -29,6 +30,16 @@ class CommentPost extends AController
         $model = $this->appHelper->getComponent('commentsModel');
         
         try {
+            
+//            TODO: На оптимизацию капчи не хватило времени. Было бы хорошо добавить валидацю в модель.
+            if (
+                !isset($params['captcha']) or
+                !isset($_SESSION['captcha_code_contacts']) or
+                $params['captcha'] != $_SESSION['captcha_code_contacts']
+            ) {
+                throw new ValidationException('Неверный защитный код');
+            }
+            
             $item = $model->initItem($params);
             $model->insert($item);
 
