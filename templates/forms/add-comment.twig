@@ -1,0 +1,35 @@
+<h2 class="h3">Добавить комментарий</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <form class="form-horizontal" action="/index.php?mode=comment-post" method="post" data-ajax-form-response="addCommentResponse" data-ajax-form>
+            <input type="hidden" name="parent_comment" value="{{ reply }}">
+            <input type="hidden" name="article" value="{{ article }}">
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="fio">Имя</label>
+                <div class="col-md-9">
+                    <input name="fio" type="text" value="" class="form-control" id="fio" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="email">Email</label>
+                <div class="col-md-9">
+                    <input name="email" type="email" value="" class="form-control" id="email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="text">Комментарий</label>
+                <div class="col-md-9">
+                    <textarea name="text" id="text" class="form-control" required></textarea>
+                </div>
+            </div>
+            <footer class="form-footer">
+                <div class="row">
+                    <div class="col-md-9 col-md-offset-3">
+                        <input type="submit" class="btn btn-primary" value="Отправить комментарий">
+                    </div>
+                </div>
+            </footer>
+        </form>
+    </div>
+</div>

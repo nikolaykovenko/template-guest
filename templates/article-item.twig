@@ -1,0 +1,11 @@
+{% include 'text.twig' with {'text': item.text} %}
+
+<div class="text-right">
+    <button class="btn btn-primary" data-add-comment="{{ item.id }}">Добавить комментарий</button>
+</div>
+
+<div data-comment-form-wrapper></div>
+
+<section class="section" data-comments-list="{{ item.id }}">
+    Подождите, пожалуйста, загрузка комментариев...
+</section>

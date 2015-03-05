@@ -1,0 +1,22 @@
+.edit-link,
+.delete-link {
+    cursor: pointer;
+}
+
+
+.section {
+    margin-bottom: 20px;
+}
+
+.qq-upload-list {
+    margin-top: 10px;
+}
+
+.qq-upload-status-message {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.qq-upload-list li {
+    margin-bottom: 5px;
+}

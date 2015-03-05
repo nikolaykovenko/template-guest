@@ -1,0 +1,16 @@
+<article class="item">
+    <h2 class="h3 fio">{{ item.fio }}</h2>
+    <div class="text comment-text">
+        {{ item.text }}
+    </div>
+    <footer class="item-footer">
+        <div class="row">
+            <div class="col-sm-6">
+                <time datatype="{{ item.add_time }}">{{ item.add_time|date }}</time>
+            </div>
+            <div class="col-sm-6 text-right">
+                <a href="#" data-add-comment="{{ item.article }}" data-reply-comment="{{ item.id }}">Ответить <span class="glyphicon glyphicon-retweet"></span></a>
+            </div>
+        </div>
+    </footer>
+</article>

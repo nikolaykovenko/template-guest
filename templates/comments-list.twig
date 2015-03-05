@@ -1,0 +1,7 @@
+<div class="comments-list">
+    {% for item in commentsList %}
+        {% include 'comment-item.twig' with {'item': item} %}
+    {% else %}
+        <p>У этой статьи нет комментариев =(</p>
+    {% endfor %}
+</div>
