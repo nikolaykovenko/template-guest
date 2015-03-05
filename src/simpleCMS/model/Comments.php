@@ -29,10 +29,7 @@ class Comments extends AModel
      */
     public function findAll($where = '', $whereValues = [])
     {
-//        TODO: Добавить построение дерева комментариев
-        
-        $result = parent::findAll($where, $whereValues);
-        return $result;
+        return $this->makeCommentsTree(parent::findAll($where, $whereValues));
     }
 
     /**
@@ -78,5 +75,52 @@ class Comments extends AModel
     protected function orderBy()
     {
         return "`id` desc";
+    }
+
+
+    /**
+     * Преобразовывает полученные из БД комментарии в древовидное состояние
+     * @param array $rawData
+     * @return array
+     */
+    private function makeCommentsTree(array $rawData)
+    {
+        $result = [];
+        
+        foreach ($rawData as $line) {
+            if ( $line->parent_comment == null) {
+                $line = $this->addItemSubItems($rawData, $line);
+                $result[] = $line;
+            }
+        }
+        
+        return $result;
+    }
+
+    /**
+     * Добавляет подэлементы
+     * @param array $rawData
+     * @param \stdClass $item
+     * @return \stdClass
+     */
+    private function addItemSubItems(array $rawData, \stdClass $item)
+    {
+        $subItems = [];
+        $result = $item;
+        
+        foreach ($rawData as $rawItem) {
+            if ($rawItem->parent_comment == $item->id) {
+                $subItems[] = $rawItem;
+            }
+        }
+        
+        if (!empty($subItems)) {
+            foreach ($subItems as &$subItem) {
+                $subItem = $this->addItemSubItems($rawData, $subItem);
+            }
+            $result->sub = $subItems;
+        }
+        
+        return $result;
     }
 }

@@ -13,4 +13,11 @@
             </div>
         </div>
     </footer>
+    {% if item.sub %}
+        <section class="replies">
+            {% for reply in item.sub %}
+                {% include 'comment-item.twig' with {'item': reply} %}
+            {% endfor %}
+        </section>
+    {% endif %}
 </article>
